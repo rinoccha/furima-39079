@@ -18,13 +18,13 @@
 ## itemsテーブル
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| goods             | string     | null: false                    |
+| goods_name        | string     | null: false                    |
 | goods_explanation | text       | null: false                    |
 | category_id       | integer    | null: false                    |
 | condition_id      | integer    | null: false                    |
 | charge_id         | integer    | null: false                    |
 | area_id           | integer    | null: false                    |
-| shipping_days_id  | integer    | null: false                    |
+| shipping_day_id   | integer    | null: false                    |
 | price             | integer    | null: false                    |
 | user              | references | null: false, foreign_key: true |
 
@@ -33,7 +33,7 @@
 - has_one :record
 
 
-## recordテーブル
+## recordsテーブル
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
@@ -45,15 +45,16 @@
 - has_one :address
 
 
-## addressテーブル
+## addressesテーブル
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | post_code        | string     | null: false                    |
-| prefecture_id    | integer    | null: false                    |
+| area_id          | integer    | null: false                    |
 | city             | string     | null: false                    |
 | address          | string     | null: false                    |
 | building         | string     |                                |
 | telephone_number | string     | null: false                    |
+| record           | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :record
