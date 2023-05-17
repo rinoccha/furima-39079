@@ -1,5 +1,4 @@
----、1~2日で発送、2~3日で発送、4~7日で発送
-class Shipping_day < ActiveHash::Base
+class Ship < ActiveHash::Base
   self.data = [
     {id:1 ,name: '---'},
     {id:2 ,name: '1~2日で発送'},
