@@ -23,54 +23,54 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Goods explanation can't be blank")
       end
       it 'カテゴリーが---の場合、出品保存できない' do
-        @item.category_id = "1"
+        @item.category_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it '商品の状態が---の場合、出品保存できない' do
-        @item.condition_id = "1"
+        @item.condition_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it '配送料が---の場合、出品保存できない' do
-        @item.charge_id = "1"
+        @item.charge_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Charge can't be blank")
       end
       it '発送元の地域が---の場合、出品保存できない' do
-        @item.area_id = "1"
+        @item.area_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Area can't be blank")
       end
       it '発送までの日数が---の場合、出品保存できない' do
-        @item.ship_id = "1"
+        @item.ship_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Ship can't be blank")
       end
       it '販売価格が空の場合、出品保存できない' do
-        @item.price = ""
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '販売価格が300円以下の場合、出品保存できない' do
         @item.price = rand(1..299)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price price outside the limits")
+        expect(@item.errors.full_messages).to include('Price price outside the limits')
       end
       it '販売価格が10000000円以上の場合、出品保存できない' do
-        @item.price = "10000000"
+        @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price price outside the limits")
+        expect(@item.errors.full_messages).to include('Price price outside the limits')
       end
       it '販売価格が全角の場合、出品保存できない' do
-        @item.price = "５００"
+        @item.price = '５００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price price outside the limits")
+        expect(@item.errors.full_messages).to include('Price price outside the limits')
       end
       it '販売価格が数字以外が入力されている場合、出品保存できない' do
-        @item.price = "abc500"
+        @item.price = 'abc500'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price price outside the limits")
+        expect(@item.errors.full_messages).to include('Price price outside the limits')
       end
       it '商品画像が空の場合、出品保存できない' do
         @item.image = nil
@@ -80,7 +80,7 @@ RSpec.describe Item, type: :model do
       it 'userが紐づいてない場合、出品保存できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
