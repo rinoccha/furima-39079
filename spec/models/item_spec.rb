@@ -72,6 +72,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price price outside the limits')
       end
+      it '販売価格に小数点以下が入力されている場合、出品保存できない' do
+        @item.price = '500.5'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be an integer')
+      end
       it '商品画像が空の場合、出品保存できない' do
         @item.image = nil
         @item.valid?
