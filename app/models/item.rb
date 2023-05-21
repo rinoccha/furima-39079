@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   validates :category_id, :condition_id, :charge_id, :area_id, :ship_id,
             numericality: { other_than: 1, message: "can't be blank" }
 
-  validates :price, presence: true, numericality: {only_integer: true}
+  validates :price, presence: true, numericality: { only_integer: true }
 
   validates_inclusion_of :price, in: 300..9_999_999, message: 'price outside the limits'
 end
