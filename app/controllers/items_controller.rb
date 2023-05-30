@@ -23,12 +23,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless @item.record.present?
-      if @item.user == current_user
-        render :edit
-      else
-        redirect_to root_path
-      end
+    if @item.record.present?
+      redirect_to root_path
+    elsif @item.user == current_user
+      render :edit
     else
       redirect_to root_path
     end
@@ -43,9 +41,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.user == current_user
-      @item.destroy
-    end
+    @item.destroy if @item.user == current_user
     redirect_to root_path
   end
 

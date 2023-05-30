@@ -2,12 +2,10 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!
   def index
     @item = Item.find(params[:item_id])
-    unless @item.record.present?
-      if @item.user_id != current_user.id
-        @record_address = RecordAddress.new
-      else
-        redirect_to root_path
-      end
+    if @item.record.present?
+      redirect_to root_path
+    elsif @item.user_id != current_user.id
+      @record_address = RecordAddress.new
     else
       redirect_to root_path
     end
@@ -26,17 +24,19 @@ class RecordsController < ApplicationController
   end
 
   private
+
   def record_address_params
-    params.require(:record_address).permit(:post_code, :area_id, :city, :address, :building, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:record_address).permit(:post_code, :area_id, :city, :address, :building, :telephone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: record_address_params[:token],
-        currency: 'jpy'
-      )
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: record_address_params[:token],
+      currency: 'jpy'
+    )
   end
-
 end
